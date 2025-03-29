@@ -19,7 +19,7 @@ app.use(cors({
   credentials: true, // Required if using cookies/auth
   methods: ["GET", "POST", "PUT", "DELETE"] // Explicitly allow these methods
 }));
-const url = `https://mern-social-3e3m.onrender.com`;
+const url = `https://socialmedia-1-bcju.onrender.com`;
 const interval = 30000;
 
 function reloadWebsite() {
