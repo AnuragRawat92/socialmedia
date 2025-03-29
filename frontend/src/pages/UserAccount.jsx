@@ -29,7 +29,7 @@ const UserAccount = ({ user: loggedInUser }) => {
   // Fetch user data
   async function fetchUser() {
     try {
-      const { data } = await axios.get("/api/user/" + params.id);
+      const { data } = await axios.get("https://socialmedia-s1pl.onrender.com/api/user/" + params.id);
       setUser(data);
       setLoading(false);
     } catch (error) {
@@ -41,7 +41,7 @@ const UserAccount = ({ user: loggedInUser }) => {
   // Fetch follow data
   async function followData() {
     try {
-      const { data } = await axios.get("/api/user/followdata/" + user._id);
+      const { data } = await axios.get("https://socialmedia-s1pl.onrender.com/api/user/followdata/" + user._id);
       setFollowersData(data.followers);
       setFollowingsData(data.followings);
     } catch (error) {
