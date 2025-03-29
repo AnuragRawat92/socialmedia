@@ -9,7 +9,7 @@ export const UserContextProvider=({children})=>{
     async function registerUser(formdata,navigate,fetchPosts) {
         setLoading(true)
         try{
-const {data}=await axios.post("/api/auth/register",formdata)
+const {data}=await axios.post("https://socialmedia-s1pl.onrender.com/api/auth/register",formdata)
 toast.success(data.message)
 setIsAuth(true)
 setUser(data.user)
@@ -26,7 +26,7 @@ fetchPosts()
     async function loginUser(email,password,navigate,fetchPosts) {
         setLoading(true)
         try{
-const {data}=await axios.post("/api/auth/login",{email ,password,navigate})
+const {data}=await axios.post("https://socialmedia-s1pl.onrender.com/api/auth/login",{email ,password,navigate})
 toast.success(data.message)
 setIsAuth(true)
 setUser(data.user)
@@ -57,7 +57,7 @@ fetchPosts()
     }
     async function logoutUser(navigate) {
         try{
-          const {data}=await axios.post("/api/auth/logout")
+          const {data}=await axios.post("https://socialmedia-s1pl.onrender.com/api/auth/logout")
           if(data.message){
             toast.success(data.message)
             setUser([])
@@ -71,7 +71,7 @@ fetchPosts()
     }
     async function followUser(id, fetchUser) {
         try {
-          const { data } = await axios.post("/api/user/follow/" + id);
+          const { data } = await axios.post("https://socialmedia-s1pl.onrender.com/api/user/follow/" + id);
     
           toast.success(data.message);
           fetchUser();
@@ -81,7 +81,7 @@ fetchPosts()
       }
       async function updateProfilePic(id, formdata, setFile) {
         try {
-          const { data } = await axios.put("/api/user/" + id, formdata);
+          const { data } = await axios.put("https://socialmedia-s1pl.onrender.com/api/user/" + id, formdata);
           toast.success(data.message);
           fetchUser();
           setFile(null);
@@ -91,7 +91,7 @@ fetchPosts()
       }
       async function updateProfileName(id, name, setShowInput) {
         try {
-          const { data } = await axios.put("/api/user/" + id, { name });
+          const { data } = await axios.put("https://socialmedia-s1pl.onrender.com/api/user/" + id, { name });
           toast.success(data.message);
           fetchUser();
           setShowInput(false);
