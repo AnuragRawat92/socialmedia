@@ -8,7 +8,7 @@ export  const ChatContextProvider=({children})=>{
     const [selectedChat ,setSelectedChat]=useState(null)
     async function createChat(id) {
         try{
-const {data}=await axios.post("/api/messages",{
+const {data}=await axios.post("https://socialmedia-s1pl.onrender.com/api/messages",{
 recieverId:id,
 message:"hii"
 })
