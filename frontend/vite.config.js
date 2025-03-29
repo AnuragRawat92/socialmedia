@@ -7,7 +7,7 @@ export default defineConfig({
   server:{
     proxy:{
     "/api":{
-      target:"http://localhost:7000",
+      target:"https://socialmedia-s1pl.onrender.com",
       changeOrigin: true,
         secure: false,
     },
