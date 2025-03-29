@@ -49,7 +49,7 @@ const PostCard = ({ type, value }) => {
   const updateCaption = async () => {
     setCaptionLoading(true);
     try {
-      const { data } = await axios.put("/api/post/" + value._id, { caption });
+      const { data } = await axios.put("https://socialmedia-s1pl.onrender.com/api/post/" + value._id, { caption });
       toast.success(data.message);
       fetchPosts();
       setShowInput(false);
