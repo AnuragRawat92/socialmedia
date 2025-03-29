@@ -11,6 +11,36 @@ import { LoadingAnimation } from './Loading';
 import toast from "react-hot-toast";
 import axios from "axios";
 import { SocketData } from "../context/SocketContext";
+
+// Create axios instance with base config
+const api = axios.create({
+  baseURL: 'https://socialmedia-s1pl.onrender.com',
+  withCredentials: true,
+});
+
+// Add request interceptor to include JWT token
+api.interceptors.request.use((config) => {
+  const token = localStorage.getItem('token');
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
+});
+
+// Add response interceptor to handle errors
+api.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response?.status === 401) {
+      // Handle unauthorized errors (token expired/invalid)
+      localStorage.removeItem('token');
+      // You might want to redirect to login here
+      toast.error('Session expired. Please login again.');
+    }
+    return Promise.reject(error);
+  }
+);
+
 const PostCard = ({ type, value }) => {
   const [isLike, setIsLike] = useState(false);
   const [showComments, setShowComments] = useState(false);
@@ -49,18 +79,20 @@ const PostCard = ({ type, value }) => {
   const updateCaption = async () => {
     setCaptionLoading(true);
     try {
-      const { data } = await axios.put("https://socialmedia-s1pl.onrender.com/api/post/" + value._id, { caption });
+      const { data } = await api.put(`/api/post/${value._id}`, { caption });
       toast.success(data.message);
       fetchPosts();
       setShowInput(false);
     } catch (error) {
       toast.error(error.response?.data?.message || "Failed to update caption");
+      console.error("Update error:", error);
     } finally {
       setCaptionLoading(false);
     }
   };
-  
+
   const { onlineUsers } = SocketData();
+  
   return (
     <div className="bg-white rounded-lg shadow mb-6 overflow-hidden">
       {/* Post Header */}
@@ -128,14 +160,13 @@ const PostCard = ({ type, value }) => {
             />
           ) : (
             <video 
-        src={value.post.url}
-        autoPlay
-        loop
-      
-        playsInline
-        controls
-        className="w-full rounded-md max-h-[600px] object-contain bg-black"
-      />
+              src={value.post.url}
+              autoPlay
+              loop
+              playsInline
+              controls
+              className="w-full rounded-md max-h-[600px] object-contain bg-black"
+            />
           )}
         </div>
 
