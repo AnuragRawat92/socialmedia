@@ -44,8 +44,7 @@ app.use(cookieParser())
 
 
 app.use(express.json())
-
-const port=7000||process.env.port
+const port = process.env.PORT || 7000;
 app.use("/api/auth",authRoutes)
 app.use("/api/user",userRoutes)
 app.use("/api/post",postRoutes)
