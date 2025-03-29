@@ -63,7 +63,7 @@ const Account = ({ user }) => {
   async function updatePassword(e) {
     e.preventDefault();
     try {
-      const { data } = await axios.post("/api/user/" + user._id, {
+      const { data } = await axios.post("https://socialmedia-s1pl.onrender.com/api/user/" + user._id, {
         oldPassword,
         newPassword,
       });
@@ -78,7 +78,7 @@ const Account = ({ user }) => {
 
   async function followData() {
     try {
-      const { data } = await axios.get(`/api/user/followdata/${user._id}`);
+      const { data } = await axios.get(`https://socialmedia-s1pl.onrender.com/api/user/followdata/${user._id}`);
       setFollowersData(data.followers);
       setFollowingsData(data.followings);
     } catch (error) {
