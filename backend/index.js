@@ -11,6 +11,13 @@ import {app,server} from "./socket/socket.js"
 import path from "path";
 
 import axios from 'axios';
+import cors from "cors"; // Add this line
+
+// Add this after app initialization
+app.use(cors({
+  origin: "https://socialmedia-1-bcju.onrender.com", // Your frontend URL
+  credentials: true, // If using cookies/auth
+}));
 const url = `https://mern-social-3e3m.onrender.com`;
 const interval = 30000;
 
