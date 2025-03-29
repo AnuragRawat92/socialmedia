@@ -9,7 +9,7 @@ export const PostContextProvider = ({ children }) => {
   
     async function fetchPosts() {
       try {
-        const { data } = await axios.get("/api/post/all");
+        const { data } = await axios.get("https://socialmedia-s1pl.onrender.com/api/post/all");
   
         setPosts(data.posts);
         setReels(data.reels);
@@ -23,7 +23,7 @@ export const PostContextProvider = ({ children }) => {
     async function addPost(formdata,setCaption,setFile,setFilePrev,type) {
       setAddLoading(true)
         try{
-const {data}=await axios.post("/api/post/new?type="+type,formdata)
+const {data}=await axios.post("https://socialmedia-s1pl.onrender.com/api/post/new?type="+type,formdata)
 toast.success(data.message)
 fetchPosts();
 setFile("")
@@ -38,7 +38,7 @@ setAddLoading(false)
     }
     async function likePost(id) {
       try{
-const {data}=await axios.post("/api/post/like/"+id);
+const {data}=await axios.post("https://socialmedia-s1pl.onrender.com/api/post/like/"+id);
 toast.success(data.message)
 fetchPosts()
       }
@@ -48,7 +48,7 @@ fetchPosts()
     }
     async function addComment(id,comment,setComment,setShow) {
       try{
-        const {data}=await axios.post("/api/post/comment/"+id,{comment});
+        const {data}=await axios.post("https://socialmedia-s1pl.onrender.com/api/post/comment/"+id,{comment});
         toast.success(data.message)
         fetchPosts()
         setComment("")
@@ -61,7 +61,7 @@ fetchPosts()
     async function deletePost(id) {
       setLoading(true);
       try {
-        const { data } = await axios.delete("/api/post/" + id);
+        const { data } = await axios.delete("https://socialmedia-s1pl.onrender.com/api/post/" + id);
   
         toast.success(data.message);
         fetchPosts();
@@ -74,7 +74,7 @@ fetchPosts()
      async function deleteComment(id, commentId) {
     try {
       const { data } = await axios.delete(
-        `/api/post/comment/${id}?commentId=${commentId}`
+        `https://socialmedia-s1pl.onrender.com/api/post/comment/${id}?commentId=${commentId}`
       );
 
       toast.success(data.message);
