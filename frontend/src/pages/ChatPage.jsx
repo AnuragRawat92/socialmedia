@@ -21,7 +21,7 @@ const ChatPage = ({ user }) => {
   async function fetchAllUsers() {
     try {
       setLoading(true);
-      const { data } = await axios.get("/api/user/all?search=" + query);
+      const { data } = await axios.get("https://socialmedia-s1pl.onrender.com/api/user/all?search=" + query);
       setUsers(data);
     } catch (error) {
       console.error("Error fetching users:", error);
@@ -33,7 +33,7 @@ const ChatPage = ({ user }) => {
   const getAllChats = async () => {
     try {
       setLoading(true);
-      const { data } = await axios.get("/api/messages/chats");
+      const { data } = await axios.get("https://socialmedia-s1pl.onrender.com/api/messages/chats");
       setChats(data);
     } catch (error) {
       console.error("Error fetching chats:", error);
