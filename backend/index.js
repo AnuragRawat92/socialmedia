@@ -14,11 +14,7 @@ import axios from 'axios';
 import cors from "cors";
 
 // Allow your frontend domain explicitly
-app.use(cors({
-  origin: "https://socialmedia-1-bcju.onrender.com", // Your frontend URL
-  credentials: true, // Required if using cookies/auth
-  methods: ["GET", "POST", "PUT", "DELETE"] // Explicitly allow these methods
-}));
+
 const url = `https://socialmedia-1-bcju.onrender.com`;
 const interval = 30000;
 
@@ -53,6 +49,12 @@ app.use(cookieParser())
 
 app.use(express.json())
 const port = process.env.PORT || 7000;
+app.use(cors({
+  origin:  "https://socialmedia-1-bcju.onrender.com",
+  credentials: true,
+  methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
+  allowedHeaders: ["Content-Type", "Authorization"]
+}));
 app.use("/api/auth",authRoutes)
 app.use("/api/user",userRoutes)
 app.use("/api/post",postRoutes)
